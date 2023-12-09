@@ -36,13 +36,13 @@ void addRecord()
   
 // Function to view the list of customer records 
 void viewRecords() 
-{ 
-    printf("\nName\t\tPhone Number\t\tUsage(min)\t\tTotal "
-           "Bill($)\n"); 
-    for (int i = 0; i < customerCount; i++) { 
-        printf("%s\t\t%s\t\t%.2f\t\t%.2f\n", customers[i].name, 
-               customers[i].phoneNumber, customers[i].usage, 
-               customers[i].totalBill); 
+{    // Print table header
+    printf("\n%-20s%-20s%-15s%-15s\n", "Name", "Phone Number", "Usage(min)", "Total Bill($)");
+
+    // Print records
+    for (int i = 0; i < customerCount; i++) {
+        printf("%-20s%-20s%-15.2f%-15.2f\n", customers[i].name, customers[i].phoneNumber,
+               customers[i].usage, customers[i].totalBill);
     } 
 } 
   
