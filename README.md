@@ -5,5 +5,8 @@
 - Also this contains the tic-tac-toe game in c 
 - these code do have a compiled version but you can compile it as well 
 - there is the algorithm for the code provided so fell free to check it out
-- the algorithm is not very detailed but it have the jist of what has been done
-
+- there is the compiled executable in the releases section
+- there are two distributions of these code one for mac and another for windows
+    - for mac download executable with programName
+    - for windows download executable with programName.exe
+    - for linux you can use the executable for mac
