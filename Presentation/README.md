@@ -154,6 +154,16 @@
 
 ---
 
+# Screenshot
+
+![Library Management System, S:1](lms1.png)
+
+---
+
+![Library Management System, S:2](lms2.png)
+
+---
+
 # Billing Management System
 
 - Uses structures
@@ -208,6 +218,12 @@
 - Displays a menu with options for different operations.
 - Takes user input to execute the chosen operation.
 - The program continues to run until the user chooses to exit.
+
+---
+
+# Screenshot of Billing Management System
+
+![Billing Management System](bms.png)
 
 ---
 
@@ -286,6 +302,12 @@
 
 ---
 
+# Screenshot for Hangman
+
+![Hangman](hangman.png)
+
+---
+
 # Quiz game
 
 - play a simple quiz game
@@ -349,6 +371,12 @@
 - else if < 40 >> failed score out of noofq
 - else >> something went wrong
 - return 0
+
+---
+
+# Screenshot for quiz
+
+![Quiz](quiz.png)
 
 ---
 
@@ -441,6 +469,12 @@
 ---
 
 # Any Queries??
+
+---
+
+# Screenshot for Tic Tac Toe
+
+![playTicTacToe](tictactoe.png)
 
 ---
 
