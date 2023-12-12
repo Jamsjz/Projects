@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Algorithm.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="library-management-system">Library Management System</h1>
+<hr>
+<ul>
+<li>library management system is a small project</li>
+<li>used to store book information</li>
+<li>uses file handling</li>
+<li>creates books.txt file</li>
+<li>stores the book information in the books.txt file</li>
+</ul>
+<!-- end_slide -->
+<h1 id="features-of-library-management-system">Features of Library Management System</h1>
+<hr>
+<!-- pause -->
+<h2 id="display-books">Display books</h2>
+<ul>
+<li>creates book.txt if not found</li>
+<li>if found displays books in table</li>
+</ul>
+<!-- pause -->
+<h2 id="add-books">Add books</h2>
+<ul>
+<li>return error if book.txt is not found so you need to display books first</li>
+</ul>
+<!-- pause -->
+<h2 id="remove-books">Remove books</h2>
+<ul>
+<li>remove book by name</li>
+<li>remove book by id</li>
+</ul>
+<!-- pause -->
+<h2 id="clear-the-screen">Clear the screen</h2>
+<!-- pause -->
+<h2 id="quit">Quit</h2>
+<!-- pause -->
+<h2 id="this-project-assigns-a-unique-id-to-each-book-but-not-serial-not">** This project assigns a unique id to each book but not serial not</h2>
+<!-- end_slide -->
+<hr>
+<h1 id="algorithm-of-library-management-system">Algorithm of Library Management System</h1>
+<hr>
+<!-- end_slide -->
+<hr>
+<h1 id="before-running-program">before running program</h1>
+<hr>
+<ul>
+<li>include libraries</li>
+<li>define files</li>
+<li>define structures</li>
+<li>protype the function</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="main">Main</h1>
+<hr>
+<ul>
+<li>say welcome</li>
+<li>display main menu</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="main-menu">main menu</h1>
+<hr>
+<ul>
+<li>show options
+{</li>
+</ul>
+<ol>
+<li>display books</li>
+<li>add books</li>
+<li>remove books</li>
+<li>clear</li>
+<li>quit
+}
+-if 1,2,3,4,5 then display books, add books, remove books, clear, quit
+-else say error</li>
+</ol>
+<!-- end_slide -->
+<hr>
+<h1 id="display-books">display books</h1>
+<hr>
+<ul>
+<li>checkDB</li>
+<li>if there is DB then display books by skipping the first line</li>
+<li>else if there is no DB then createDB</li>
+</ul>
+<!-- pause -->
+<h2 id="createdb">createDB</h2>
+<ul>
+<li>make a file named books.txt namely books</li>
+<li>ask for the capacity of library and add it to the first line</li>
+<li>show the books by skipping the first line that contains capacity</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="add-books">add books</h1>
+<hr>
+<ul>
+<li>open books in append mode</li>
+<li>if checkDB return 1 then append books</li>
+<li>else createDB then append books</li>
+</ul>
+<!-- pause -->
+<h2 id="append-books">append books</h2>
+<ul>
+<li>open books in append mode</li>
+<li>get the last id from the books.txt</li>
+</ul>
+<!-- pause -->
+<h3 id="get-last-id">get last id</h3>
+<ul>
+<li>skip first line that has capacity</li>
+<li>iterate upto last line while putting the value for last id(
+the last iteration will give the last id )</li>
+<li>return lastid</li>
+<li>ask for book name, book author</li>
+<li>this books id = lastid + 1</li>
+<li>put these information in the file</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="remove-book">remove book</h1>
+<hr>
+<p>-open books in read mode</p>
+<ul>
+<li>open temp file in write mode</li>
+<li>ask if user want to remove by id or name</li>
+<li>if by name them remove book by name</li>
+<li>if by id then remove book by id</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="remove-book-by-id">remove book by id</h1>
+<hr>
+<ul>
+<li>open books in read mode</li>
+<li>open temp file in write mode</li>
+<li>copy capacity of book to temp file</li>
+<li>iterate{
+<ul>
+<li>check if the id of the book mathches the id specified by the user</li>
+<li>if not matches, write the book to the temp file</li>
+<li>if matches, dont write the book to the temp file</li>
+</ul>
+</li>
+<li>remove the books.txt</li>
+<li>rename the temp.txt to books.txt
+}
+-close books</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="remove-by-name">remove by name</h1>
+<hr>
+<ul>
+<li>open books in read mode</li>
+<li>open temp file in write mode</li>
+<li>copy capacity of book to temp file</li>
+<li>iterate{
+<ul>
+<li>check if the name of the book mathches the name specified by the user</li>
+<li>if not matches, write the book to the temp file</li>
+<li>if matches, dont write the book to the temp file</li>
+</ul>
+</li>
+<li>remove the books.txt</li>
+<li>rename the temp.txt to books.txt
+}
+-close books</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="clear">clear</h1>
+<hr>
+<ul>
+<li>tell system terminal (bash) to clear the screen</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h2 id="quit">quit</h2>
+<hr>
+<ul>
+<li>quit the program</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="screenshot">Screenshot</h1>
+<hr>
+<p><img src="lms1.png" alt="Library Management System, S:1"></p>
+<!-- end_slide -->
+<hr>
+<p><img src="lms2.png" alt="Library Management System, S:2"></p>
+<!-- end_slide -->
+<hr>
+<h1 id="billing-management-system">Billing Management System</h1>
+<hr>
+<ul>
+<li>Uses structures</li>
+<li>phone billing System</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="features">Features</h1>
+<hr>
+<ul>
+<li>show the total bill</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>add bill</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>remove bill</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>calculate cost for minutes of call</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="algorithm-for-billing-management-system">Algorithm for Billing Management System</h1>
+<hr>
+<!-- end_slide -->
+<hr>
+<h1 id="algorithm-for-operations">Algorithm for Operations</h1>
+<hr>
+<!-- pause -->
+<h2 id="1-adding-a-new-record-addrecord-function">1. Adding a New Record (<code>addRecord</code> Function)</h2>
+<ul>
+<li>Prompts the user to input customer information (name, phone number, and usage in minutes).</li>
+<li>Calculates the total bill based on usage.</li>
+<li>Adds the new record to the <code>customers</code> array.</li>
+</ul>
+<!-- pause -->
+<h2 id="2-viewing-list-of-records-viewrecords-function">2. Viewing List of Records (<code>viewRecords</code> Function)</h2>
+<ul>
+<li>Prints a table header.</li>
+<li>Iterates through the <code>customers</code> array and prints each customer's information.</li>
+</ul>
+<!-- pause -->
+<h2 id="3-modifying-a-record-modifyrecord-function">3. Modifying a Record (<code>modifyRecord</code> Function)</h2>
+<ul>
+<li>Takes a phone number as input to identify the record to be modified.</li>
+<li>Prompts the user to enter the new usage in minutes.</li>
+<li>Updates the total bill based on the new usage.</li>
+</ul>
+<!-- pause -->
+<h2 id="4-viewing-payment-viewpayment-function">4. Viewing Payment (<code>viewPayment</code> Function)</h2>
+<ul>
+<li>Takes a phone number as input to identify the record to be viewed.</li>
+<li>Prints the name, phone number, usage, and total bill for the specified customer.</li>
+</ul>
+<!-- pause -->
+<h2 id="5-deleting-a-record-deleterecord-function">5. Deleting a Record (<code>deleteRecord</code> Function)</h2>
+<ul>
+<li>Takes a phone number as input to identify the record to be deleted.</li>
+<li>Shifts the remaining records to fill the gap created by the deleted record.</li>
+</ul>
+<!-- pause -->
+<h2 id="6-displaying-menu-and-main-loop-displaymenu-and-main-functions">6. Displaying Menu and Main Loop (<code>displayMenu</code> and <code>main</code> Functions)</h2>
+<ul>
+<li>Displays a menu with options for different operations.</li>
+<li>Takes user input to execute the chosen operation.</li>
+<li>The program continues to run until the user chooses to exit.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="screenshot-of-billing-management-system">Screenshot of Billing Management System</h1>
+<hr>
+<p><img src="bms.png" alt="Billing Management System"></p>
+<!-- end_slide -->
+<hr>
+<h1 id="hangman-game">Hangman game</h1>
+<hr>
+<ul>
+<li>simple hangman game</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="hangman-game-algorithm">Hangman Game Algorithm</h1>
+<hr>
+<!-- end_slide -->
+<hr>
+<h1 id="initialization">Initialization:</h1>
+<hr>
+<ul>
+<li>Import necessary libraries (<code>stdio.h</code>, <code>stdlib.h</code>, <code>string.h</code>, <code>ctype.h</code>, <code>time.h</code>).</li>
+<li>Declare function prototypes for <code>drawHangman</code> and <code>strlwr</code>.</li>
+<li>Define <code>main</code> function:
+<ul>
+<li>Declare variables and arrays for the game: - <code>choice</code> for user input to play again. - <code>guessWords</code> array containing words for the game. - <code>randomIndex</code> to randomly select a word index. - <code>numLives</code> for tracking remaining lives. - <code>numCorrect</code> for counting correct guesses. - <code>oldCorrect</code> to compare with <code>numCorrect</code> for wrong guesses. - <code>lengthOfWord</code> for the length of the selected word. - <code>letterGuessed</code> array to track guessed letters. - <code>quit</code> to determine if the user quit early. - <code>loopIndex</code> for iterating over the word. - <code>reguessed</code> to check if a letter has been guessed before. - <code>guess</code> array to store user input. - <code>letterEntered</code> to store the guessed letter.</li>
+</ul>
+</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="game-loop">Game Loop:</h1>
+<hr>
+<!-- pause -->
+<ul>
+<li>
+<p>Start a do-while loop to allow multiple game plays.</p>
+<ul>
+<li>Seed the random number generator with <code>srand(time(NULL))</code>.</li>
+</ul>
+</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>Randomly select a word index (<code>randomIndex</code>) from <code>guessWords</code>.</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>Initialize game variables (<code>numLives</code>, <code>numCorrect</code>, <code>oldCorrect</code>, etc.).</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>
+<p>Start a while loop for each turn of the game until the word is guessed or lives run out.</p>
+<ul>
+<li>
+<p>Display the current state of the word with underscores for unguessed letters.</p>
+</li>
+<li>
+<p>Display the hangman figure based on the number of incorrect guesses.</p>
+</li>
+<li>
+<p>Prompt the player for a letter guess.</p>
+</li>
+<li>
+<p>Convert the guess to lowercase using the <code>strlwr</code> function.</p>
+</li>
+<li>
+<p>Check if the player wants to quit (<code>strncmp(guess, &quot;quit&quot;, 4)</code>).</p>
+</li>
+<li>
+<p>Clear the console screen (<code>system(&quot;clear&quot;)</code> or <code>system(&quot;cls&quot;)</code>).</p>
+</li>
+<li>
+<p>Process the user's guess:</p>
+</li>
+<li>
+<p>Check if the letter has already been guessed.</p>
+</li>
+<li>
+<p>Update the game state based on the guess.</p>
+</li>
+<li>
+<p>Check if the player has won or lost.</p>
+</li>
+<li>
+<p>If the player wants to quit, exit the loop.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Display the game result (win, lose, or quit).</p>
+</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>Ask the player if they want to play again (<code>printf(&quot;\nDo you want to Play Again?(Y/N)\n&quot;)</code>).</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>Read the player's choice into the <code>choice</code> variable.</li>
+</ul>
+<!-- pause -->
+<ul>
+<li>Continue the loop if the player wants to play again (<code>while (choice == 'Y' || choice == 'y')</code>).</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="drawing-the-hangman">Drawing the Hangman:</h1>
+<hr>
+<ul>
+<li>Implement the <code>drawHangman</code> function to display the hangman figure based on the number of lives.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="convert-string-to-lowercase">Convert String to Lowercase:</h1>
+<hr>
+<ul>
+<li>Implement the <code>strlwr</code> function to convert a string to lowercase.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="end-of-program">End of Program:</h1>
+<hr>
+<ul>
+<li>Return 0 from the <code>main</code> function.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="screenshot-for-hangman">Screenshot for Hangman</h1>
+<hr>
+<p><img src="hangman.png" alt="Hangman"></p>
+<!-- end_slide -->
+<hr>
+<h1 id="quiz-game">Quiz game</h1>
+<hr>
+<ul>
+<li>play a simple quiz game</li>
+<li>uses file handling</li>
+<li>creates qna.txt file</li>
+<li>stores the questions and answers in the qna.txt file</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="features-of-quiz-game">Features of Quiz game</h1>
+<hr>
+<ul>
+<li>quiz game with questions and answers</li>
+<li>display questions</li>
+<li>display answers</li>
+<li>display score</li>
+<li>save score</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="algorithm-of-quiz-game">Algorithm of Quiz game</h1>
+<hr>
+<!-- end_slide -->
+<hr>
+<h1 id="before-running-the-function">before running the function</h1>
+<hr>
+<ul>
+<li>include libraries of string ctypes stdio stdlib</li>
+<li>include qna.txt which contains question,4 options,corresponding_correct_answer_no</li>
+<li>define functions tolower</li>
+</ul>
+<h1 id="tolowercase-strcall-by-reference">toLowercase *str(call by reference)</h1>
+<ul>
+<li>initialize i = 0</li>
+<li>iterate over the string
+<ul>
+<li>lower the character</li>
+</ul>
+</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="getnoofquestion">get_no_of_question</h1>
+<hr>
+<ul>
+<li>open qna</li>
+<li>init i = 0</li>
+<li>while seeing question, 4 options, and the correct answer increase i</li>
+<li>print no of question</li>
+<li>return no of question</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="main-fuction">MAIN FUCTION</h1>
+<hr>
+<ul>
+<li>init score = 0, noofq = get_no_of_questions</li>
+<li>open qna</li>
+<li>loop init i = 0 upto less than no of questions with increment of one question
+<ul>
+<li>see i th line of qna</li>
+<li>print questions then options</li>
+<li>take user input as answer</li>
+<li>if answer == correct option increase score</li>
+<li>else go to next question</li>
+</ul>
+</li>
+<li>float percentage = score/noofq * 100</li>
+<li>if percentage == 100 &gt;&gt; perfect score</li>
+<li>else if &gt;= 80 &gt;&gt; excellent score out of noofq</li>
+<li>else if &gt;= 60 &gt;&gt; good score out of noofq</li>
+<li>else if &gt;= 40 &gt;&gt; satisfactory score out of noofq</li>
+<li>else if &lt; 40 &gt;&gt; failed score out of noofq</li>
+<li>else &gt;&gt; something went wrong</li>
+<li>return 0</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="screenshot-for-quiz">Screenshot for quiz</h1>
+<hr>
+<p><img src="quiz.png" alt="Quiz"></p>
+<!-- end_slide -->
+<hr>
+<h1 id="tic-tac-toe-game">Tic Tac Toe Game</h1>
+<hr>
+<ul>
+<li>uses 2D array to display the game</li>
+<li>uses indexing to input the position of player X or 0</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="algorithm-of-tic-tac-toe-game">Algorithm of Tic Tac Toe Game</h1>
+<hr>
+<!-- end_slide -->
+<hr>
+<h1 id="initialization">Initialization</h1>
+<hr>
+<ul>
+<li>Define a 3x3 character array <code>board</code> to represent the Tic Tac Toe board.</li>
+<li>Implement the <code>initializeBoard</code> function to initialize the board with empty spaces and display cell numbers.</li>
+<li>Create a main function (<code>main</code>) to set up the game, display instructions, and start the game loop.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="display-functions">Display Functions</h1>
+<hr>
+<h2 id="initializeboard-function"><code>initializeBoard</code> Function</h2>
+<ul>
+<li>Initialize the <code>board</code> array with empty spaces.</li>
+<li>Display the initial board layout with numbered cells.</li>
+</ul>
+<h2 id="showboard-function"><code>showBoard</code> Function</h2>
+<ul>
+<li>Display the current state of the Tic Tac Toe board.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="update-board">Update Board</h1>
+<hr>
+<h2 id="updateboard-function"><code>updateBoard</code> Function</h2>
+<ul>
+<li>Take a cell number and player's sign as input.</li>
+<li>Calculate the corresponding row and column for the cell number.</li>
+<li>Check if the selected cell is already filled; if not, update the board with the player's sign.</li>
+<li>Display the updated board.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="check-winner">Check Winner</h1>
+<hr>
+<h2 id="checkwinner-function"><code>checkWinner</code> Function</h2>
+<ul>
+<li>Check for winning conditions in rows, columns, and diagonals.</li>
+<li>Return 1 if a player has won; otherwise, return 0.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="game-loop">Game Loop</h1>
+<hr>
+<h2 id="playtictactoe-function"><code>playTicTacToe</code> Function</h2>
+<ul>
+<li>Initialize variables for game results, selected cell, play count, and update result.</li>
+<li>Alternate turns between Player 1 (X) and Player 2 (O).</li>
+<li>Accept user input for cell selection.</li>
+<li>Update the board and check for a winner after each move.</li>
+<li>Display the result at the end of the game.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="main-function">Main Function</h1>
+<hr>
+<ul>
+<li>Display game instructions and initial board.</li>
+<li>Wait for user input to start the game.</li>
+<li>Start the game loop.</li>
+<li>Provide a menu for restarting or exiting the game.</li>
+<li>Continue playing or exit based on user choice.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="termination">Termination</h1>
+<hr>
+<ul>
+<li>Thank the player for participating.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="execution">Execution</h1>
+<hr>
+<ul>
+<li>Compile and run the program.</li>
+<li>Follow on-screen instructions to play Tic Tac Toe.</li>
+<li>Terminate the game or restart based on user input.</li>
+</ul>
+<!-- end_slide -->
+<hr>
+<h1 id="screenshot-for-tic-tac-toe">Screenshot for Tic Tac Toe</h1>
+<hr>
+<p><img src="tictactoe.png" alt="playTicTacToe"></p>
+<!-- end_slide -->
+<hr>
+<h1 id="any-queries">Any Queries??</h1>
+<hr>
+<!-- end_slide -->
+
+</body>
+</html>
